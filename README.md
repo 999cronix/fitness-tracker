@@ -1,32 +1,48 @@
 # Fitness-Tracker
 
-Web-App zum Zusammentragen und Auswerten von Trainingsdaten. Nutzer tragen Workouts ein (Übung, Gewicht, Wiederholungen). Das Backend wertet die Daten per Formel aus und berechnet daraus die nächste Übung bzw. das nächste Gewicht.
+Web-App, die Gesundheits- und Fitnessdaten an einem Ort zusammenfasst, speichert und auswertet: Gym, Laufen, Schlaf, Kalorien und mehr.
 
-## Idee
+## Projektbeschreibung
 
-1. **Daten zusammentragen**: eigene Workout-Einträge, später auch Daten aus angebundenen Apps
-2. **Daten auswerten**: Progress, Trainingsverlauf und Empfehlung für das nächste Gewicht
-3. **Ergebnis prüfen und erklären**: eine KI kontrolliert die Berechnung und erklärt sie
+Nutzer sammeln ihre Daten rund um Fitness in einer App:
+
+- **Training**: Gym-Workouts (Übung, Gewicht, Wiederholungen) und Läufe
+- **Schlaf und Ernährung**: Schlafdauer, Kalorien
+- **Supplements**: welche Nahrungsergänzungsmittel eingenommen werden
+- **Gesundheitskontext**: vom Nutzer eingetragene Einschränkungen oder Vorerkrankungen (z. B. schlechte Leberwerte)
+
+Die Daten werden dauerhaft gespeichert und ausgewertet. Mehrere Accounts werden unterstützt.
+
+## Auswertung: Formeln und KI
+
+| Teil | Aufgabe |
+|---|---|
+| **Formeln (Backend)** | Tracking und Berechnungen laufen deterministisch im Backend, z. B. Progress und nächstes Trainingsgewicht. Sie sind per Unit-Test prüfbar. |
+| **KI** | Prüft die berechneten Ergebnisse und gibt Hinweise. Grundlage sind Prompts und Wissen (Knowledge), die wir ihr mitgeben. Die KI erklärt die Berechnungen nicht und rechnet nicht selbst. |
+
+Die Hinweise der KI ersetzen keine ärztliche oder medizinische Beratung.
 
 ## Funktionen
 
 | Bereich | Inhalt | Status |
 |---|---|---|
-| Workouts | Übung, Gewicht, Wiederholungen, Datum eintragen und anzeigen | Milestone 1: Datenmodell und GET-Endpunkt |
-| Auswertung | Progress und nächste Übung per Formel (deterministisch im Backend, per Unit-Test prüfbar) | geplant |
-| App-Anbindung | Daten aus Fitness-Apps über APIs (z. B. Strava, Whoop) | geplant |
-| KI-Analyse | Auswertung von Daten wie Schlaf und Ernährung, Erklärung der Berechnung | geplant |
+| Workouts | Einträge anlegen und anzeigen | Milestone 1: Datenmodell und GET-Endpunkt |
+| Tracking und Berechnung | Progress, nächste Übung, Kalorien per Formel | geplant |
+| Accounts | Mehrere Nutzer, Anmeldung | geplant |
+| Supplements und Gesundheitskontext | Eingabe durch den Nutzer, fließt in die KI-Hinweise ein | geplant |
+| App-Anbindung | Daten aus Fitness- und Ernährungs-Apps über APIs (z. B. Strava, Whoop, YAZIO), sofern ein Zugang verfügbar ist | geplant |
+| KI-Hinweise | Prüfung der Ergebnisse, Hinweise anhand von Prompts und Knowledge | geplant |
 
 ## Architektur
 
 - **Backend**: Spring Boot (Java), REST-API mit JSON
 - **Frontend**: Vue.js, eigenes Repository (ab Milestone 2)
-- **Prinzip**: Formeln laufen im Backend. Die KI berechnet nichts, sie prüft und erklärt nur.
+- **Datenbank**: PostgreSQL (ab Milestone 4)
 
 ## Stand Milestone 1
 
 - Spring-Boot-Backend mit Entity `WorkoutEntry` (id, date, exercise, weight, reps)
-- `GET /workouts` liefert eine Liste von Workouts als JSON
+- `GET /workouts` liefert eine Liste von Beispiel-Workouts als JSON
 
 ## Starten
 
@@ -38,10 +54,7 @@ Voraussetzung: Java installiert.
 
 Danach im Browser öffnen: http://localhost:8080/workouts
 
-Beispielantwort:
-
-    [{"id":1,"date":"2026-10-05","exercise":"Bench Press","weight":60.0,"reps":8}, ...]
-
 ## Team
 
 - 999cronix
+- Justin Witt
