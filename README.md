@@ -1,6 +1,6 @@
 # Fitness-Tracker
 
-Web-App, die Gesundheits- und Fitnessdaten an einem Ort zusammenfasst, speichert und auswertet: Gym, Laufen, Schlaf, Kalorien und mehr.
+Web-App, die Fitnessdaten an einem Ort zusammenfasst, speichert und auswertet: Gym, Laufen, Schlaf, Kalorien und mehr.
 
 ## Projektbeschreibung
 
@@ -9,7 +9,6 @@ Nutzer sammeln ihre Daten rund um Fitness in einer App:
 - **Training**: Gym-Workouts (Übung, Gewicht, Wiederholungen) und Läufe
 - **Schlaf und Ernährung**: Schlafdauer, Kalorien
 - **Supplements**: welche Nahrungsergänzungsmittel eingenommen werden
-- **Gesundheitskontext**: vom Nutzer eingetragene Einschränkungen oder Vorerkrankungen (z. B. schlechte Leberwerte)
 
 Die Daten werden dauerhaft gespeichert und ausgewertet. Mehrere Accounts werden unterstützt.
 
@@ -17,10 +16,8 @@ Die Daten werden dauerhaft gespeichert und ausgewertet. Mehrere Accounts werden 
 
 | Teil | Aufgabe |
 |---|---|
-| **Formeln (Backend)** | Tracking und Berechnungen laufen deterministisch im Backend, z. B. Progress und nächstes Trainingsgewicht. Sie sind per Unit-Test prüfbar. |
+| **Formeln (Backend)** | Tracking und Berechnungen laufen deterministisch im Backend, z. B. Progress, nächstes Trainingsgewicht und Kalorien. Sie sind per Unit-Test prüfbar. |
 | **KI** | Prüft die berechneten Ergebnisse und gibt Hinweise. Grundlage sind Prompts und Wissen (Knowledge), die wir ihr mitgeben. Die KI erklärt die Berechnungen nicht und rechnet nicht selbst. |
-
-Die Hinweise der KI ersetzen keine ärztliche oder medizinische Beratung.
 
 ## Funktionen
 
@@ -29,7 +26,7 @@ Die Hinweise der KI ersetzen keine ärztliche oder medizinische Beratung.
 | Workouts | Einträge anlegen und anzeigen | Milestone 1: Datenmodell und GET-Endpunkt |
 | Tracking und Berechnung | Progress, nächste Übung, Kalorien per Formel | geplant |
 | Accounts | Mehrere Nutzer, Anmeldung | geplant |
-| Supplements und Gesundheitskontext | Eingabe durch den Nutzer, fließt in die KI-Hinweise ein | geplant |
+| Supplements | Eingabe durch den Nutzer, fließt in die KI-Hinweise ein | geplant |
 | App-Anbindung | Daten aus Fitness- und Ernährungs-Apps über APIs (z. B. Strava, Whoop, YAZIO), sofern ein Zugang verfügbar ist | geplant |
 | KI-Hinweise | Prüfung der Ergebnisse, Hinweise anhand von Prompts und Knowledge | geplant |
 
@@ -57,4 +54,4 @@ Danach im Browser öffnen: http://localhost:8080/workouts
 ## Team
 
 - 999cronix
-- Justin Witt
+- JustinM27
