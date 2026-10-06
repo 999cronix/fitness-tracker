@@ -8,7 +8,6 @@ Nutzer sammeln ihre Daten rund um Fitness in einer App:
 
 - **Training**: Gym-Workouts (Übung, Gewicht, Wiederholungen) und Läufe
 - **Schlaf und Ernährung**: Schlafdauer, Kalorien
-- **Supplements**: welche Nahrungsergänzungsmittel eingenommen werden
 
 Die Daten werden dauerhaft gespeichert und ausgewertet. Mehrere Accounts werden unterstützt.
 
@@ -26,7 +25,6 @@ Die Daten werden dauerhaft gespeichert und ausgewertet. Mehrere Accounts werden 
 | Workouts | Einträge anlegen und anzeigen | Milestone 1: Datenmodell und GET-Endpunkt |
 | Tracking und Berechnung | Progress, nächste Übung, Kalorien per Formel | geplant |
 | Accounts | Mehrere Nutzer, Anmeldung | geplant |
-| Supplements | Eingabe durch den Nutzer, fließt in die KI-Hinweise ein | geplant |
 | App-Anbindung | Daten aus Fitness- und Ernährungs-Apps über APIs (z. B. Strava, Whoop, YAZIO), sofern ein Zugang verfügbar ist | geplant |
 | KI-Hinweise | Prüfung der Ergebnisse, Hinweise anhand von Prompts und Knowledge | geplant |
 
