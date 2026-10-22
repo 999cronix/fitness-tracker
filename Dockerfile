@@ -13,6 +13,9 @@ FROM eclipse-temurin:25-jre
 WORKDIR /app
 # Nur die ausfuehrbare jar kopieren; die *-plain.jar wird durch das Muster *-SNAPSHOT.jar ausgeschlossen
 COPY --from=build /app/build/libs/*-SNAPSHOT.jar app.jar
+# Die Anwendung laeuft nicht als root, sondern als normaler Benutzer ohne Sonderrechte
+RUN useradd --system --no-create-home appuser
+USER appuser
 # Dokumentiert den Port, auf dem die Anwendung lauscht (Render setzt zusaetzlich PORT)
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

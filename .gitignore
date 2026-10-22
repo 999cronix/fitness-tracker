@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Zugangsdaten und lokale Umgebungsdateien ###
+.env
+.env.*
+!.env.example
+*.pem
+*.key
