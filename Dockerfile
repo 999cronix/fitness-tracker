@@ -3,9 +3,14 @@
 # Stufe 1: Build mit JDK und Gradle-Wrapper
 FROM eclipse-temurin:25-jdk AS build
 WORKDIR /app
-COPY . /app
+# Zuerst nur die Build-Dateien kopieren und die Abhaengigkeiten laden.
+# Diese Schicht bleibt im Docker-Cache, solange sich die Build-Dateien nicht aendern.
+COPY gradlew settings.gradle build.gradle ./
+COPY gradle gradle
 # Gradle-Wrapper ausfuehrbar machen, falls die Rechte beim Kopieren verloren gehen
-RUN chmod +x gradlew
+RUN chmod +x gradlew && ./gradlew dependencies --no-daemon > /dev/null
+# Erst danach den Quellcode kopieren, der sich oft aendert
+COPY src src
 RUN ./gradlew bootJar --no-daemon
 
 # Stufe 2: schlankes Laufzeit-Image nur mit JRE
