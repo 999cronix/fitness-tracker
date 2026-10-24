@@ -16,13 +16,14 @@ import java.time.LocalDate;
  * Die Pruef-Regeln (Bean Validation) sorgen dafuer, dass nur sinnvolle Werte gespeichert werden.
  *
  * @param exercise der Name der Uebung, nicht leer, hoechstens 100 Zeichen
- * @param date das Datum des Trainings, nicht in der Zukunft
- * @param weightKg das Gewicht in kg, zwischen 0 und 1000
+ * @param date das Datum des Trainings, nicht in der Zukunft (ein Tag Toleranz wegen Zeitzonen)
+ * @param weightKg das Gewicht in kg, Pflichtfeld, zwischen 0 und 1000
  * @param reps die Wiederholungen, zwischen 1 und 1000
  */
 public record CreateWorkoutRequest(
         @NotBlank @Size(max = 100) String exercise,
         @NotNull @PastOrPresent LocalDate date,
-        @DecimalMin("0.0") @DecimalMax("1000.0") double weightKg,
+        // Double statt double: so ist ein fehlendes Gewicht null und wird von @NotNull abgelehnt
+        @NotNull @DecimalMin("0.0") @DecimalMax("1000.0") Double weightKg,
         @Min(1) @Max(1000) int reps) {
 }

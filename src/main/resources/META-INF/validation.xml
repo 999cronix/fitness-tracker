@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Toleranz von 24 Stunden bei Datumspruefungen: Der Server laeuft in UTC, das Frontend schickt
+     das lokale Datum. Ohne Toleranz waere "heute" in Berlin kurz nach Mitternacht fuer den Server schon "morgen". -->
+<validation-config xmlns="https://jakarta.ee/xml/ns/validation/configuration" version="3.0">
+    <property name="hibernate.validator.temporal_validation_tolerance">86400000</property>
+</validation-config>

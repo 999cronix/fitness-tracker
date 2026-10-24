@@ -11,10 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 /** Prueft die CORS-Regeln: nur das Frontend darf, nur GET, POST und OPTIONS, nur Content-Type. */
 @SpringBootTest
 @AutoConfigureMockMvc
+// Transactional: Eintraege aus POST-Tests werden nach jedem Test wieder zurueckgerollt
+@Transactional
 class CorsConfigTest {
 
     // Standardwert aus application.properties (app.cors.allowed-origins)

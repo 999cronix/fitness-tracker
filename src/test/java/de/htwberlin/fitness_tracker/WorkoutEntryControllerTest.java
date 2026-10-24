@@ -124,9 +124,45 @@ class WorkoutEntryControllerTest {
 
     @Test
     void postDatumInDerZukunftGibt400() throws Exception {
-        String morgen = LocalDate.now().plusDays(1).toString();
-        postJson(body("\"Squat\"", "\"" + morgen + "\"", "60", "8")).andExpect(status().isBadRequest());
+        // 3 Tage: ein Tag Toleranz wegen Zeitzonen ist erlaubt (siehe META-INF/validation.xml)
+        String inDreiTagen = LocalDate.now().plusDays(3).toString();
+        postJson(body("\"Squat\"", "\"" + inDreiTagen + "\"", "60", "8")).andExpect(status().isBadRequest());
         assertThat(repository.count()).isZero();
+    }
+
+    @Test
+    void postDatumMorgenWirdWegenZeitzonenAkzeptiert() throws Exception {
+        String morgen = LocalDate.now().plusDays(1).toString();
+        postJson(body("\"Squat\"", "\"" + morgen + "\"", "60", "8")).andExpect(status().isCreated());
+    }
+
+    @Test
+    void postFehlendesGewichtGibt400() throws Exception {
+        postJson("{\"exercise\":\"Squat\",\"date\":\"2026-10-05\",\"reps\":8}")
+                .andExpect(status().isBadRequest());
+        assertThat(repository.count()).isZero();
+    }
+
+    @Test
+    void postKaputtesJsonGibt400OhneStacktrace() throws Exception {
+        postJson("{kaputt")
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.trace").doesNotExist())
+                .andExpect(jsonPath("$.message").doesNotExist());
+    }
+
+    @Test
+    void postFalscherTypGibt400OhneStacktrace() throws Exception {
+        postJson("{\"exercise\":\"Squat\",\"date\":\"2026-10-05\",\"weightKg\":60,\"reps\":\"abc\"}")
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.trace").doesNotExist())
+                .andExpect(jsonPath("$.message").doesNotExist());
+    }
+
+    @Test
+    void postFalschesDatumsformatGibt400() throws Exception {
+        postJson("{\"exercise\":\"Squat\",\"date\":\"05.10.2026\",\"weightKg\":60,\"reps\":8}")
+                .andExpect(status().isBadRequest());
     }
 
     @Test

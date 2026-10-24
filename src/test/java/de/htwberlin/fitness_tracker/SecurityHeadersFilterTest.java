@@ -10,7 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -28,8 +29,8 @@ class SecurityHeadersFilterTest {
 
     @BeforeEach
     void repositoryLiefertLeereListe() {
-        // Die Sortier-Abfrage im Controller bekommt eine leere Liste zurueck
-        when(repository.findAll(any(Sort.class))).thenReturn(List.of());
+        // Die Abfrage im Controller (erste Seite, sortiert) bekommt eine leere Seite zurueck
+        when(repository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(List.of()));
     }
 
     @Test
