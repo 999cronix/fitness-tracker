@@ -23,8 +23,9 @@ public class CorsConfig implements WebMvcConfigurer {
 
     /**
      * Registriert die CORS-Regeln fuer alle Pfade unter "/".
-     * Es werden nur GET- und OPTIONS-Anfragen erlaubt. OPTIONS ist die
-     * Vorab-Anfrage (Preflight), mit der der Browser vorher nachfragt.
+     * Erlaubt sind GET, POST und OPTIONS. OPTIONS ist die Vorab-Anfrage (Preflight),
+     * mit der der Browser vorher nachfragt. Als Header ist nur Content-Type erlaubt,
+     * damit das Frontend JSON per POST schicken kann.
      *
      * @param registry Sammelstelle, in der die CORS-Regeln eingetragen werden
      */
@@ -32,6 +33,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(allowedOrigins)
-                .allowedMethods("GET", "OPTIONS");
+                .allowedMethods("GET", "POST", "OPTIONS")
+                .allowedHeaders("Content-Type");
     }
 }
